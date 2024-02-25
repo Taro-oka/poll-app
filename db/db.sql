@@ -1,7 +1,7 @@
 --
 -- Database: pollapp
 --
-DROP DATABASE pollapp;
+-- DROP DATABASE pollapp; ※ もともと作成していなかったら、そんなもん存在しないよ、とエラーになる！！
 CREATE DATABASE IF NOT EXISTS pollapp DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE pollapp;
 

@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !^/poll
+RewriteRule .? /poll/ [R,L]
+
+# 指定されたファイルやディレクトリが存在しない時は、↓にアクセスするようにする命令だが、CodeMafiaさんの配布ファイルに則ってやる場合のみ必要な設定
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .? /poll/index.php [L,QSA]
+# 以下、補足
+# ↑のセクションは、リクエストされたファイル名が実際のファイル(!-f)やディレクトリ(!-d)に該当しない場合に、リクエストを/poll/index.phpにリライトします。ここでも[L]フラグが使われているため、このルールにマッチした場合は、以降のルールは無視されます。[QSA]フラグは、リクエストの元々のクエリ文字列が新しいURLに追加されることを保証します。
+    
+# RewriteRule (part.+(end|start)) /poll/$1/index.php（これはCodeMafiaさんの配布ファイルに従った場合の設定）
