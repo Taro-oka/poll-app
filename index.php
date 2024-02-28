@@ -2,6 +2,10 @@
 
 require_once 'config.php';
 
+// Library
+require_once SOUECE_BASE . 'libs/helper.php';
+require_once SOUECE_BASE . 'libs/auth.php';
+
 // Model
 require_once SOUECE_BASE . 'models/user.model.php';
 
