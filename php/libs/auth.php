@@ -25,4 +25,20 @@ class Auth
 
         return $is_success;
     }
+
+    public static function register($id, $pwd, $nickname)
+    {
+        $is_success = false;
+
+        $user_exists = UserQuery::fetchById($id);
+
+        if (!empty($user_exists)) {
+            echo 'ユーザーがすでに存在します';
+            return false;
+        }
+
+        $is_success = UserQuery::insert($id, $pwd, $nickname);
+
+        return $is_success;
+    }
 }
