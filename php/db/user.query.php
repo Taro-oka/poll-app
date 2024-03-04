@@ -20,18 +20,18 @@ class UserQuery
         return $result;
     }
 
-    public static function insert($id, $pwd, $nickname)
+    public static function insert($user)
     {
         $db = new DataSource;
         $sql = "INSERT INTO users (id, pwd, nickname) VALUES (:id, :pwd, :nickname)";
 
         // ここでハッシュ化を行う！！デフォルトではbcrypt。
-        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
 
         return $db->execute($sql, [
-            ':id' => $id,
+            ':id' => $user->id,
             ':pwd' => $pwd,
-            ':nickname' => $nickname
+            ':nickname' => $user->nickname
         ]);
     }
 }

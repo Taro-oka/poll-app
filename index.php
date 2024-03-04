@@ -7,6 +7,7 @@ require_once SOUECE_BASE . 'libs/helper.php';
 require_once SOUECE_BASE . 'libs/auth.php';
 
 // Model
+require_once SOUECE_BASE . 'models/abstract.model.php';
 require_once SOUECE_BASE . 'models/user.model.php';
 
 // DB
