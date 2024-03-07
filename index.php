@@ -10,6 +10,9 @@ require_once SOUECE_BASE . 'libs/auth.php';
 require_once SOUECE_BASE . 'models/abstract.model.php';
 require_once SOUECE_BASE . 'models/user.model.php';
 
+// Message
+require_once SOUECE_BASE . 'libs/message.php';
+
 // DB
 require_once SOUECE_BASE . 'db/datasource.php';
 require_once SOUECE_BASE . 'db/user.query.php';
