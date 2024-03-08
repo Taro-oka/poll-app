@@ -24,3 +24,8 @@ function get_url($path)
 {
     return BASE_CONTEXT_PATH . trim($path, '/');
 }
+
+function is_alnum($val)
+{
+    return preg_match("/^[0-9a-zA-Z]+$/", $val);
+}

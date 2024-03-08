@@ -11,14 +11,14 @@
 <body>
     <?php
 
-    use lib\Auth;
+    // use lib\Auth;
     use lib\Msg;
 
     Msg::flush();
 
-    if (Auth::isLogin()) {
-        echo 'ログイン中です';
-    } else {
-        echo 'ログインしていません';
-    }
+    // if (Auth::isLogin()) {
+    //     echo 'ログイン中です';
+    // } else {
+    //     echo 'ログインしていません';
+    // }
     ?>
