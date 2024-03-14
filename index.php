@@ -11,6 +11,7 @@ require_once SOUECE_BASE . 'libs/router.php';
 // Model
 require_once SOUECE_BASE . 'models/abstract.model.php';
 require_once SOUECE_BASE . 'models/user.model.php';
+require_once SOUECE_BASE . 'models/topic.model.php';
 
 // Message
 require_once SOUECE_BASE . 'libs/message.php';
@@ -18,6 +19,20 @@ require_once SOUECE_BASE . 'libs/message.php';
 // DB
 require_once SOUECE_BASE . 'db/datasource.php';
 require_once SOUECE_BASE . 'db/user.query.php';
+require_once SOUECE_BASE . 'db/topic.query.php';
+
+// Partials
+require_once SOUECE_BASE . 'partials/topic-list-item.php';
+require_once SOUECE_BASE . 'partials/header.php';
+require_once SOUECE_BASE . 'partials/footer.php';
+
+
+// View
+require_once SOUECE_BASE . 'views/login.php';
+require_once SOUECE_BASE . 'views/register.php';
+require_once SOUECE_BASE . 'views/topic/archive.php';
+
+
 
 // 学習用：PHPのuseは、use 名前空間\XXXX と書くと、勝手にXXXXをクラスだと認識する。なので、名前空間内の関数をuseしたい場合は、use function 名前空間\関数名
 // というように、関数であることを明示する必要がある！！
@@ -27,7 +42,7 @@ use function lib\route;
 session_start();
 
 try {
-    require_once SOUECE_BASE . 'partials/header.php';
+    \partials\header();
 
     // 学習用：root pathという意味合いでよく用いられる変数名である。
     $rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
@@ -37,7 +52,7 @@ try {
 
     route($rpath, $method);
 
-    require_once SOUECE_BASE . 'partials/footer.php';
+    \partials\footer();
 } catch (Throwable $e) {
     die('<h1>何かがすごくおかしいようです。</h1>');
 }

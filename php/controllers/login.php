@@ -6,9 +6,10 @@ use lib\Auth;
 use lib\Msg;
 use model\UserModel;
 
+
 function get()
 {
-    require_once SOUECE_BASE . 'views/login.php';
+    \view\login\index();
 }
 
 function post()

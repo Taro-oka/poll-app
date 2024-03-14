@@ -22,6 +22,7 @@ function route($rpath, $method)
         require_once $targetFile;
 
         // 学習用：getかpostかによって、namespaceと組み合わせて呼び出す関数を切り分けている！（ダブルクオーテーションの関係上、バックスラッシュはエスケープのために2個書いている）
+        $rpath = str_replace('/', '\\', $rpath);
         $fn = "\\controller\\{$rpath}\\{$method}";
 
         $fn();

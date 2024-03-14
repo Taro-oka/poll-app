@@ -8,7 +8,7 @@ use model\UserModel;
 
 function get()
 {
-    require_once SOUECE_BASE . 'views/register.php';
+    \view\register\index();
 }
 
 function post()
