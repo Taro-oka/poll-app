@@ -13,6 +13,7 @@ class TopicModel extends Abstract_model
     public int $likes;
     public int $dislikes;
     public string $user_id;
+    public string $nickname;
     public int $del_flg;
 
     //学習用： アンダースコアをつけているのは、外部から触る値でないことを、明示するため！

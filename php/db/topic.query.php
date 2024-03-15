@@ -14,26 +14,25 @@ class TopicQuery
         }
 
         $db = new DataSource;
-        $sql = 'select * from topics where user_id = :id and del_flg != 1';
+        $sql = 'select * from topics where user_id = :id and del_flg != 1 order by id desc';
         $result = $db->select($sql, [
             ':id' => $user->id
         ], DataSource::CLS, TopicModel::class);
 
         return $result;
     }
+    public static function fetchPublishedTopics()
+    {
+        $db = new DataSource;
+        $sql = '
+        select t.*, u.nickname from pollapp.topics t 
+        inner join pollapp.users u 
+        on t.user_id = u.id 
+        where t.del_flg != 1 and u.del_flg != 1 and t.published = 1
+        order by t.id desc;
+        ';
+        $result = $db->select($sql, [], DataSource::CLS, TopicModel::class);
 
-    // public static function insert($user)
-    // {
-    //     $db = new DataSource;
-    //     $sql = "INSERT INTO users (id, pwd, nickname) VALUES (:id, :pwd, :nickname)";
-
-    //     // ここでハッシュ化を行う！！デフォルトではbcrypt。
-    //     $pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
-
-    //     return $db->execute($sql, [
-    //         ':id' => $user->id,
-    //         ':pwd' => $pwd,
-    //         ':nickname' => $user->nickname
-    //     ]);
-    // }
+        return $result;
+    }
 }

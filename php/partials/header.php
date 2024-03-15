@@ -47,9 +47,9 @@ function header()
             </header>
             <main class="container py-3">
 
-            <?php
+<?php
 
-            Msg::flush();
-        }
+Msg::flush();
+}
 
-            ?>
+?>

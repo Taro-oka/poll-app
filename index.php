@@ -23,11 +23,13 @@ require_once SOUECE_BASE . 'db/topic.query.php';
 
 // Partials
 require_once SOUECE_BASE . 'partials/topic-list-item.php';
+require_once SOUECE_BASE . 'partials/topic-header-item.php';
 require_once SOUECE_BASE . 'partials/header.php';
 require_once SOUECE_BASE . 'partials/footer.php';
 
 
 // View
+require_once SOUECE_BASE . 'views/home.php';
 require_once SOUECE_BASE . 'views/login.php';
 require_once SOUECE_BASE . 'views/register.php';
 require_once SOUECE_BASE . 'views/topic/archive.php';
