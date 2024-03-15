@@ -39,10 +39,12 @@ class TopicModel extends Abstract_model
     //     return $res;
     // }
 
-    // public function isValidId()
-    // {
-    //     return static::validateId($this->id);
-    // }
+    public function isValidId()
+    {
+        // return static::validateId($this->id);
+        // 暫定的に
+        return true;
+    }
 
     // public static function validatePwd($val)
     // {

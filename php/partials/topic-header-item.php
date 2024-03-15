@@ -104,6 +104,4 @@ function comment_form($topic)
 <?php
 }
 
-
-
 ?>

@@ -12,6 +12,7 @@ require_once SOUECE_BASE . 'libs/router.php';
 require_once SOUECE_BASE . 'models/abstract.model.php';
 require_once SOUECE_BASE . 'models/user.model.php';
 require_once SOUECE_BASE . 'models/topic.model.php';
+require_once SOUECE_BASE . 'models/comment.model.php';
 
 // Message
 require_once SOUECE_BASE . 'libs/message.php';
@@ -20,6 +21,7 @@ require_once SOUECE_BASE . 'libs/message.php';
 require_once SOUECE_BASE . 'db/datasource.php';
 require_once SOUECE_BASE . 'db/user.query.php';
 require_once SOUECE_BASE . 'db/topic.query.php';
+require_once SOUECE_BASE . 'db/comment.query.php';
 
 // Partials
 require_once SOUECE_BASE . 'partials/topic-list-item.php';
@@ -33,6 +35,7 @@ require_once SOUECE_BASE . 'views/home.php';
 require_once SOUECE_BASE . 'views/login.php';
 require_once SOUECE_BASE . 'views/register.php';
 require_once SOUECE_BASE . 'views/topic/archive.php';
+require_once SOUECE_BASE . 'views/topic/detail.php';
 
 
 
@@ -46,9 +49,10 @@ session_start();
 try {
     \partials\header();
 
+    // 学習用：？以降のクエリーは取り除いてリクエストを送る必要がある！コントローラーの中身は、あくまでクエリまでの部分でファイルを取得するので。
+    $url = parse_url(CURRENT_URI);
     // 学習用：root pathという意味合いでよく用いられる変数名である。
-    $rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
-
+    $rpath = str_replace(BASE_CONTEXT_PATH, '', $url['path']);
     // 学習用：デフォルトではGETが返ってくる。サイトのリロードなどのリクエストも基本GET
     $method = strtolower($_SERVER['REQUEST_METHOD']);
 

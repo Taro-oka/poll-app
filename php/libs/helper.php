@@ -1,6 +1,7 @@
 <?php
 function get_param($key, $default_val, $is_post = true)
 {
+    // 学習用：GETの時は、URLの？以降と同じものがGET配列に入っている！！
     $array = $is_post ? $_POST : $_GET;
     return $array[$key] ?? $default_val;
 }
