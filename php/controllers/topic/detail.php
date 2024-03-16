@@ -14,6 +14,9 @@ function get()
     // 学習用：ここで、GETメソッド（URLに取る欲しい値が明示してある時は、$_GET配列に同じものが入っている！！！）
     $topic->id = get_param('topic_id', null, false);
 
+    // 学習用：閲覧された時にカウントを増やす実装は、getメソッドが呼ばれた時の呼べば良い！！！！
+    TopicQuery::incrementViewCount($topic);
+
     $fetchedTopic = TopicQuery::fetchById($topic);
     $comments = CommentQuery::fetchByTopicId($topic);
 

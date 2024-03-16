@@ -41,7 +41,7 @@ function topic_main($topic, $from_top_page)
         <?php if ($from_top_page) : ?>
             <h1 class="sr-only">みんなのアンケート</h1>
             <h2 class="h1">
-                <a class="text-body" href="<?php echo the_url('topic/detail?id=' . $topic->id); ?>">
+                <a class="text-body" href="<?php echo the_url('topic/detail?topic_id=' . $topic->id); ?>">
                     <?php echo $topic->title; ?>
                 </a>
             </h2>
