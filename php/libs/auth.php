@@ -2,6 +2,7 @@
 
 namespace lib;
 
+use db\TopicQuery;
 use db\UserQuery;
 use model\UserModel;
 use Throwable;
@@ -99,6 +100,19 @@ class Auth
     {
         if (!static::isLogin()) {
             Msg::push(Msg::ERROR, "ログインしてください。");
+            redirect('login');
+        }
+    }
+
+    public static function hasPermission($topic_id, $user)
+    {
+        return TopicQuery::isUserOwnTopic($topic_id, $user);
+    }
+
+    public static function requirePermission($topic_id, $user)
+    {
+        if (!static::hasPermission($topic_id, $user)) {
+            Msg::push(Msg::ERROR, '編集権限がありません。再度ログインしなおしてください。');
             redirect('login');
         }
     }

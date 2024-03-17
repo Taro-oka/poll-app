@@ -36,6 +36,7 @@ require_once SOUECE_BASE . 'views/login.php';
 require_once SOUECE_BASE . 'views/register.php';
 require_once SOUECE_BASE . 'views/topic/archive.php';
 require_once SOUECE_BASE . 'views/topic/detail.php';
+require_once SOUECE_BASE . 'views/topic/edit.php';
 
 
 

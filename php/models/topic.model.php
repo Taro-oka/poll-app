@@ -46,6 +46,11 @@ class TopicModel extends Abstract_model
         return true;
     }
 
+    public static function validateId($val)
+    {
+        return true;
+    }
+
     // public static function validatePwd($val)
     // {
     //     $res = true;

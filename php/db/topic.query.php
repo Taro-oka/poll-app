@@ -46,7 +46,7 @@ class TopicQuery
         select t.*, u.nickname from pollapp.topics t 
         inner join pollapp.users u 
         on t.user_id = u.id 
-        where t.id = :id and t.del_flg != 1 and u.del_flg != 1 and t.published = 1
+        where t.id = :id and t.del_flg != 1 and u.del_flg != 1
         order by t.id desc;
         ';
         $result = $db->selectOne($sql, [
@@ -65,6 +65,46 @@ class TopicQuery
         $sql = 'update topics set views = views + 1 where id = :id;';
 
         return $db->execute($sql, [
+            ':id' => $topic->id
+        ]);
+    }
+
+    public static function isUserOwnTopic($topic_id, $user)
+    {
+        if (!(TopicModel::validateId($topic_id) && $user->isValidId())) {
+            return false;
+        }
+
+        $db = new DataSource;
+        $sql = '
+        select count(1) as count from pollapp.topics t
+        where t.id = :topic_id
+        and t.user_id = :user_id
+        and t.del_flg != 1;
+        ';
+
+        $result = $db->selectOne($sql, [
+            ':topic_id' => $topic_id,
+            ':user_id' => $user->id,
+        ]);
+
+        if (!empty($result) && $result['count'] !== 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function update($topic)
+    {
+        // 値のチェックをする
+
+        $db = new DataSource;
+        $sql = 'update topics set published = :published, title = :title where id = :id';
+
+        return $db->execute($sql, [
+            ':published' => $topic->published,
+            ':title' => $topic->title,
             ':id' => $topic->id
         ]);
     }
