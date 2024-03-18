@@ -97,7 +97,10 @@ class TopicQuery
 
     public static function update($topic)
     {
-        // 値のチェックをする
+
+        if (!($topic->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
+            return false;
+        };
 
         $db = new DataSource;
         $sql = 'update topics set published = :published, title = :title where id = :id';
@@ -106,6 +109,44 @@ class TopicQuery
             ':published' => $topic->published,
             ':title' => $topic->title,
             ':id' => $topic->id
+        ]);
+    }
+
+    public static function insert($topic, $user)
+    {
+
+        if (!($user->isValidId() * $topic->isValidTitle() * $topic->isValidPublished())) {
+            return false;
+        };
+
+        $db = new DataSource;
+        $sql = 'insert into topics (title, published, user_id) values(:title, :published , :user_id)';
+
+        return $db->execute($sql, [
+            ':title' => $topic->title,
+            ':published' => $topic->published,
+            ':user_id' => $user->id,
+        ]);
+    }
+
+    public static function incrementLikesOrDislikes($comment)
+    {
+        if (!($comment->isValidTopicId() * $comment->isValidAgree())) {
+            return false;
+        };
+
+        $db = new DataSource;
+
+        if ($comment->agree) {
+            // 学習用：likesの値をいちいち取ってこなくても、１だけ、インクリメントしてやればOK
+            $sql = 'update topics set likes = likes + 1 where id = :topic_id';
+        } else {
+            $sql = 'update topics set dislikes = dislikes + 1 where id = :topic_id';
+        }
+
+
+        return $db->execute($sql, [
+            ':topic_id' => $comment->topic_id,
         ]);
     }
 }

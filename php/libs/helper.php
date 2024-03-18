@@ -34,3 +34,21 @@ function is_alnum($val)
 {
     return preg_match("/^[0-9a-zA-Z]+$/", $val);
 }
+
+// 学習用：HTMLのエスケープ関数。テキストエリアなどに、JavaScriptのスクリプトタグなんかを入れられると、データベースにそのままタグが追加され、それを読み込んだ時にそのJavaScriptが実行されてしまう！！ので、↓を使ってHTMLをエスケープしてやる必要がある。
+function escape($data)
+{
+    if (is_array($data)) {
+        foreach ($data as $key => $val) {
+            $data[$key] = escape($val);
+        }
+        return $data;
+    } else if (is_object($data)) {
+        foreach ($data as $key => $val) {
+            $data->$key = escape($val);
+        }
+        return $data;
+    } else {
+        return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    }
+}

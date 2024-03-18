@@ -30,4 +30,21 @@ class CommentQuery
 
         return $result;
     }
+
+    public static function insert($comment)
+    {
+        if (!($comment->isValidAgree() * $comment->isValidBody() * $comment->isValidTopicId())) {
+            return false;
+        };
+
+        $db = new DataSource;
+        $sql = 'insert into comments (topic_id, agree, body, user_id) values(:topic_id, :agree, :body, :user_id)';
+
+        return $db->execute($sql, [
+            'topic_id' => $comment->topic_id,
+            'agree' => $comment->agree,
+            'body' => $comment->body,
+            'user_id' => $comment->user_id,
+        ]);
+    }
 }

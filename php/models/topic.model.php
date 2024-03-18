@@ -19,93 +19,72 @@ class TopicModel extends Abstract_model
     //学習用： アンダースコアをつけているのは、外部から触る値でないことを、明示するため！
     protected static $SESSION_NAME = '_topic';
 
-    // public static function validateId($val)
-    // {
-    //     $res = true;
-    //     if (empty($val)) {
-    //         Msg::push(Msg::ERROR, 'ユーザーIDを入力してください。');
-    //         $res = false;
-    //     } else {
-    //         if (strlen($val) > 10) {
-    //             Msg::push(Msg::ERROR, 'ユーザーIDは10桁以下で入力してください。');
-    //             $res = false;
-    //         }
-
-    //         if (!is_alnum($val)) {
-    //             Msg::push(Msg::ERROR, 'ユーザーIDは半角英数字で入力してください。');
-    //             $res = false;
-    //         }
-    //     }
-    //     return $res;
-    // }
-
+    // 以下、バリデーション関数の
     public function isValidId()
     {
-        // return static::validateId($this->id);
-        // 暫定的に
-        return true;
+        return static::validateId($this->id);
     }
 
     public static function validateId($val)
     {
-        return true;
+        $res = true;
+
+        if (empty($val) || !is_numeric($val)) {
+
+            Msg::push(Msg::ERROR, 'パラメータが不正です。');
+            $res = false;
+        }
+
+        return $res;
     }
 
-    // public static function validatePwd($val)
-    // {
-    //     $res = true;
+    public function isValidTitle()
+    {
+        return static::validateTitle($this->title);
+    }
 
-    //     if (empty($val)) {
+    public static function validateTitle($val)
+    {
+        $res = true;
 
-    //         Msg::push(Msg::ERROR, 'パスワードを入力してください。');
-    //         $res = false;
-    //     } else {
+        if (empty($val)) {
 
-    //         if (strlen($val) < 4) {
+            Msg::push(Msg::ERROR, 'タイトルを入力してください。');
+            $res = false;
+        } else {
 
-    //             Msg::push(Msg::ERROR, 'パスワードは４桁以上で入力してください。');
-    //             $res = false;
-    //         }
+            if (mb_strlen($val) > 30) {
 
-    //         if (!is_alnum($val)) {
+                Msg::push(Msg::ERROR, 'タイトルは30文字以内で入力してください。');
+                $res = false;
+            }
+        }
 
-    //             Msg::push(Msg::ERROR, 'パスワードは半角英数字で入力してください。');
-    //             $res = false;
-    //         }
-    //     }
+        return $res;
+    }
 
-    //     return $res;
-    // }
+    public function isValidPublished()
+    {
+        return static::validatePublished($this->published);
+    }
 
-    // public function isValidPwd()
-    // {
-    //     return static::validatePwd($this->pwd);
-    // }
+    public static function validatePublished($val)
+    {
+        $res = true;
 
-    // public static function validateNickname($val)
-    // {
+        if (!isset($val)) {
 
-    //     $res = true;
+            Msg::push(Msg::ERROR, '公開するか選択してください。');
+            $res = false;
+        } else {
+            // 0、または1以外の時
+            if (!($val == 0 || $val == 1)) {
 
-    //     if (empty($val)) {
+                Msg::push(Msg::ERROR, '公開ステータスが不正です。');
+                $res = false;
+            }
+        }
 
-    //         Msg::push(Msg::ERROR, 'ニックネームを入力してください。');
-    //         $res = false;
-    //     } else {
-
-    //         // 学習用：mb_strlenは、全角、半角のいずれでも、１文字を１文字とカウントする！
-    //         if (mb_strlen($val) > 10) {
-
-    //             Msg::push(Msg::ERROR, 'ニックネームは１０桁以下で入力してください。');
-    //             $res = false;
-    //         }
-    //     }
-
-    //     return $res;
-    // }
-
-    // public function isValidNickname()
-    // {
-    //     return static::validateNickname($this->nickname);
-    // }
+        return $res;
+    }
 }

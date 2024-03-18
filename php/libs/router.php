@@ -29,6 +29,6 @@ function route($rpath, $method)
     } catch (Throwable $E) {
         Msg::push(Msg::DEBUG, $E->getMessage());
         Msg::push(Msg::ERROR, '何かがおかしいようです。。');
-        require_once SOUECE_BASE . 'views/404.php';
+        redirect('404');
     }
 }

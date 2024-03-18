@@ -13,6 +13,13 @@ function get()
 {
     Auth::requireLogin();
 
+    $topic = TopicModel::getSessionAndFlush();
+
+    if (!empty($topic)) {
+        \view\topic\edit\index($topic, true);
+        return;
+    }
+
     $topic = new TopicModel;
     // 学習用：ここで、GETメソッド（URLに取る欲しい値が明示してある時は、$_GET配列に同じものが入っている！！！）
     $topic->id = get_param('topic_id', null, false);
@@ -27,7 +34,7 @@ function get()
         redirect('404');
     }
 
-    \view\topic\edit\index($fetchedTopic);
+    \view\topic\edit\index($fetchedTopic, true);
 }
 
 function post()
@@ -54,6 +61,7 @@ function post()
         redirect('topic/archive');
     } else {
         Msg::push(Msg::ERROR, 'メッセージの更新に失敗しました。');
+        TopicModel::setSession($topic);
         redirect(GO_REFERER);
     }
 }
