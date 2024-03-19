@@ -13,8 +13,12 @@ function footer()
         <span class="text-muted">&copy; Taro Okamoto</span>
     </footer>
     </div>
-    </body>
+
+    <script src="<?php echo BASE_JS_PATH ?>vendors/chart.js"></script>
+    <script src="<?php echo BASE_JS_PATH ?>pie-chart.js" type="module"></script>
     <script src="<?php echo BASE_JS_PATH ?>form-validate.js" type="module"></script>
+
+    </body>
 
     </html>
 
